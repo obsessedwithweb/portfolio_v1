@@ -37,20 +37,19 @@ const SkillsList = () => {
   const [openItem, setOpenItem] = useState<string | null>(null);
 
   const skills = {
-    "Web Development": [
+    "Next JS": [
       "Single Page Applications (SPAs)",
       "Landing pages and business websites",
       "Portfolio websites",
     ],
-    "Mobile Development": [
-      "Mobile-friendly web apps",
-      "React Native mobile apps",
+    "Django": [
+      "Strong backend with python's framework",
     ],
-    "UI/UX Design & Prototyping": [
-      "UI design with Figma & Canva",
-      "UX research & improvements",
-      "Prototyping for websites & mobile apps",
-    ],
+    // "UI/UX Design & Prototyping": [
+    //   "UI design with Figma & Canva",
+    //   "UX research & improvements",
+    //   "Prototyping for websites & mobile apps",
+    // ],
   };
 
   const toggleItem = (item: string) => {
