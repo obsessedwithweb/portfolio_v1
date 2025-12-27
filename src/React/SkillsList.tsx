@@ -1,34 +1,52 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const CategoryIcons = {
-  "Web Development": (
+  "Full Stack Development": (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill="currentColor"
-      className="w-6 h-6 text-[var(--sec)] opacity-70"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="w-6 h-6 text-[var(--sec)]"
     >
-      <path d="M21 3C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H21ZM20 11H4V19H20V11ZM20 5H4V9H20V5ZM11 6V8H9V6H11ZM7 6V8H5V6H7Z"></path>
+      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
     </svg>
   ),
-  "Mobile Development": (
+  "Backend Engineering": (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill="currentColor"
-      className="w-6 h-6 text-[var(--sec)] opacity-70"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="w-6 h-6 text-[var(--sec)]"
     >
-      <path d="M7 4V20H17V4H7ZM6 2H18C18.5523 2 19 2.44772 19 3V21C19 21.5523 18.5523 22 18 22H6C5.44772 22 5 21.5523 5 21V3C5 2.44772 5.44772 2 6 2ZM12 17C12.5523 17 13 17.4477 13 18C13 18.5523 12.5523 19 12 19C11.4477 19 11 18.5523 11 18C11 17.4477 11.4477 17 12 17Z"></path>
+      <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />
+      <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />
+      <line x1="6" y1="6" x2="6.01" y2="6" />
+      <line x1="6" y1="18" x2="6.01" y2="18" />
     </svg>
   ),
-  "UI/UX Design & Prototyping": (
+  "Database Management": (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill="currentColor"
-      className="w-6 h-6 text-[var(--sec)] opacity-70"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="w-6 h-6 text-[var(--sec)]"
     >
-      <path d="M5.7646 7.99998L5.46944 7.26944C5.26255 6.75737 5.50995 6.17454 6.02202 5.96765L15.2939 2.22158C15.8059 2.01469 16.3888 2.26209 16.5956 2.77416L22.2147 16.6819C22.4216 17.194 22.1742 17.7768 21.6622 17.9837L12.3903 21.7298C11.8783 21.9367 11.2954 21.6893 11.0885 21.1772L11.0002 20.9586V21H7.00021C6.44792 21 6.00021 20.5523 6.00021 20V19.7303L2.65056 18.377C2.13849 18.1701 1.89109 17.5873 2.09798 17.0752L5.7646 7.99998ZM8.00021 19H10.2089L8.00021 13.5333V19ZM6.00021 12.7558L4.32696 16.8972L6.00021 17.6084V12.7558ZM7.69842 7.44741L12.5683 19.5008L19.9858 16.5039L15.1159 4.45055L7.69842 7.44741ZM10.6766 9.47974C10.1645 9.68663 9.5817 9.43924 9.37481 8.92717C9.16792 8.4151 9.41532 7.83227 9.92739 7.62538C10.4395 7.41849 11.0223 7.66588 11.2292 8.17795C11.4361 8.69002 11.1887 9.27286 10.6766 9.47974Z"></path>
+      <ellipse cx="12" cy="5" rx="9" ry="3" />
+      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
     </svg>
   ),
 };
@@ -37,19 +55,24 @@ const SkillsList = () => {
   const [openItem, setOpenItem] = useState<string | null>(null);
 
   const skills = {
-    "Next JS": [
-      "Single Page Applications (SPAs)",
-      "Landing pages and business websites",
-      "Portfolio websites",
+    "Full Stack Development": [
+      "Building scalable web applications from scratch using Next.js and React.",
+      "Creating responsive and interactive user interfaces with Tailwind CSS.",
+      "Implementing secure authentication and authorization systems.",
+      "Optimizing application performance for speed and SEO.",
     ],
-    "Django": [
-      "Strong backend with python's framework",
+    "Backend Engineering": [
+      "Designing robust APIs with Node.js, Elysia, and Django.",
+      "Managing server-side logic and database interactions.",
+      "Implementing real-time features using WebSockets.",
+      "Ensuring data security and integrity.",
     ],
-    // "UI/UX Design & Prototyping": [
-    //   "UI design with Figma & Canva",
-    //   "UX research & improvements",
-    //   "Prototyping for websites & mobile apps",
-    // ],
+    "Database Management": [
+      "Designing efficient database schemas with PostgreSQL and MySQL.",
+      "Using ORMs like Prisma and Drizzle for type-safe database access.",
+      "Optimizing queries for high-performance data retrieval.",
+      "Managing database migrations and backups.",
+    ],
   };
 
   const toggleItem = (item: string) => {
@@ -58,54 +81,74 @@ const SkillsList = () => {
 
   return (
     <div className="text-left pt-3 md:pt-9">
-      <h3 className="text-[var(--white)] text-3xl md:text-4xl font-semibold md:mb-6">
-        What I do?
+      <h3 className="text-[var(--white)] text-3xl md:text-4xl font-semibold md:mb-6 mb-4">
+        My Expertise
       </h3>
+      <p className="text-[var(--white-icon)] mb-8 text-sm md:text-base max-w-md">
+        I specialize in building high-quality web applications with a focus on performance, scalability, and user experience.
+      </p>
       <ul className="space-y-4 mt-4 text-lg">
         {Object.entries(skills).map(([category, items]) => (
           <li key={category} className="w-full">
-            <div
+            <motion.div
+              layout
               onClick={() => toggleItem(category)}
-              className="md:w-[400px] w-full bg-[#1414149c] rounded-2xl text-left hover:bg-opacity-80 transition-all border border-[var(--white-icon-tr)] cursor-pointer overflow-hidden"
+              className={`md:w-[400px] w-full rounded-2xl text-left transition-all border cursor-pointer overflow-hidden ${openItem === category
+                ? "bg-[var(--white-icon-tr)] border-[var(--sec)] shadow-[0_0_15px_rgba(164,118,255,0.15)]"
+                : "bg-[#1414149c] border-[var(--white-icon-tr)] hover:border-[var(--white-icon)]"
+                }`}
             >
               <div className="flex items-center gap-3 p-4">
-                {CategoryIcons[category]}
+                <div className={`p-2 rounded-lg ${openItem === category ? "bg-[var(--sec)]/10" : "bg-transparent"}`}>
+                  {CategoryIcons[category as keyof typeof CategoryIcons]}
+                </div>
                 <div className="flex items-center gap-2 flex-grow justify-between">
-                  <div className="min-w-0 max-w-[200px] md:max-w-none overflow-hidden">
-                    <span className="block truncate text-[var(--white)] text-lg">
-                      {category}
-                    </span>
-                  </div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className={`w-6 h-6 text-[var(--white)] transform transition-transform flex-shrink-0 ${
-                      openItem === category ? "rotate-180" : ""
-                    }`}
+                  <span className={`block font-medium text-lg ${openItem === category ? "text-[var(--sec)]" : "text-[var(--white)]"}`}>
+                    {category}
+                  </span>
+                  <motion.div
+                    animate={{ rotate: openItem === category ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path>
-                  </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className={`w-5 h-5 ${openItem === category ? "text-[var(--sec)]" : "text-[var(--white-icon)]"}`}
+                    >
+                      <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path>
+                    </svg>
+                  </motion.div>
                 </div>
               </div>
 
-              <div
-                className={`transition-all duration-300 px-4 ${
-                  openItem === category
-                    ? "max-h-[500px] pb-4 opacity-100"
-                    : "max-h-0 opacity-0"
-                }`}
-              >
-                <ul className="space-y-2 text-[var(--white-icon)] text-sm">
-                  {items.map((item, index) => (
-                    <div key={index} className="flex items-center">
-                      <span className="pl-1">•</span>
-                      <li className="pl-3">{item}</li>
-                    </div>
-                  ))}
-                </ul>
-              </div>
-            </div>
+              <AnimatePresence>
+                {openItem === category && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="px-4"
+                  >
+                    <ul className="space-y-3 pb-6 text-[var(--white-icon)] text-sm border-t border-[var(--white-icon-tr)] pt-4 mt-2">
+                      {items.map((item, index) => (
+                        <motion.li
+                          key={index}
+                          initial={{ x: -10, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          transition={{ delay: index * 0.1 }}
+                          className="flex items-start gap-3"
+                        >
+                          <span className="text-[var(--sec)] mt-1.5 text-xs">●</span>
+                          <span className="leading-relaxed">{item}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           </li>
         ))}
       </ul>

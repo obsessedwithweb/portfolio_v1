@@ -27,7 +27,7 @@ const navItems: NavItem[] = [
 <div class="flex justify-center w-full">
   <nav
     id="main-nav"
-    class="fixed left-1/2 -translate-x-1/2 z-[100] bg-[var(--background)] border border-1 border-transparent backdrop-blur-xl transition-all duration-500 ease-in-out md:top-6 md:bottom-auto bottom-0 w-[80%]"
+    class="fixed left-1/2 -translate-x-1/2 z-[100] border border-white/10 backdrop-blur-md transition-all duration-500 ease-in-out md:top-6 md:bottom-auto bottom-0 w-[80%] bg-black/20 shadow-lg"
   >
     <div class="container mx-auto flex justify-center items-center p-3">
       <ul
@@ -38,13 +38,15 @@ const navItems: NavItem[] = [
             <li class="flex-1 md:flex-none">
               <a
                 href={item.href}
-                class="flex flex-col items-center gap-1 text-[var(--white-icon)] transition-colors text-xs md:text-base relative group"
+                class="flex flex-col items-center gap-1 text-white/60 hover:text-white transition-colors text-xs md:text-base relative group"
               >
                 <div class="absolute -left-6 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full transition-all duration-300 scale-0 opacity-0 bg-[#A9FF5B] nav-indicator hidden md:block" />
                 <span class="md:hidden flex items-center justify-center w-6 h-6">
                   <fragment set:html={item.icon} />
                 </span>
-                <span class="hidden md:inline-block">{item.label}</span>
+                <span class="hidden md:inline-block font-medium">
+                  {item.label}
+                </span>
                 <span class="md:hidden">{item.label}</span>
               </a>
             </li>
@@ -57,26 +59,36 @@ const navItems: NavItem[] = [
 <style>
   nav {
     transform: translateX(-50%);
-    background-color: var(--background);
     transition:
+      width 0.3s ease,
       background-color 0.3s ease,
       border-radius 0.3s ease,
-      border-color 0.3s ease;
+      border-color 0.3s ease,
+      backdrop-filter 0.3s ease;
   }
 
   nav.scrolling {
-    background-color: var(--component-bg);
-    border-color: #ffffff10;
+    background-color: rgba(
+      20,
+      20,
+      20,
+      0.6
+    ); /* Semi-transparent dark background */
+    backdrop-filter: blur(16px); /* Stronger blur for glass effect */
+    border-color: rgba(255, 255, 255, 0.1);
     border-radius: 9999px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   }
 
   nav a.active .nav-indicator {
     transform: translateY(-50%) scale(1);
     opacity: 1;
+    box-shadow: 0 0 10px #a9ff5b;
   }
 
   nav a.active {
     color: white !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
 
   @media (max-width: 767px) {
@@ -87,12 +99,13 @@ const navItems: NavItem[] = [
       left: 50%;
       position: fixed;
       border-radius: 1rem 1rem 0 0;
-      border-color: #ffffff10;
+      border-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(20, 20, 20, 0.8);
+      backdrop-filter: blur(20px);
     }
 
     nav.scrolling {
       border-radius: 1rem 1rem 0 0;
-      background-color: var(--component-bg);
     }
 
     body {
@@ -134,7 +147,7 @@ const navItems: NavItem[] = [
         rafId = requestAnimationFrame(updateNav);
       }
     },
-    { passive: true }
+    { passive: true },
   );
 
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -171,7 +184,7 @@ const navItems: NavItem[] = [
 
     const observer = new IntersectionObserver(
       observerCallback,
-      observerOptions
+      observerOptions,
     );
     sections.forEach((section) => observer.observe(section));
   });

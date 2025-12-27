@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import svgl from "../../public/svgl.png";
-import stockin from "../../public/stockin.png";
-import moviesfordevs from "../../public/moviesfordevs.png";
-import velez from "../../public/velez.png";
+import libraryStore from "../../public/projects/library-store/home.png";
+import issueTracker from "../../public/projects/issue-tracker/home.png";
+import realtimeChat from "../../public/projects/realtime-chat/main-realtime-chat.jpg";
+import clinicBooking from "../../public/projects/clinic-booking-system/clinic-home-en.png";
 
 interface Project {
   title: string;
@@ -11,38 +11,54 @@ interface Project {
   link: string;
   preview: string;
   status: string;
+  slug: string;
+  isPremium?: boolean;
+  description: string;
 }
 
 const projects: Project[] = [
   {
-    title: "MoviesForDevs",
-    image: moviesfordevs as ImageMetadata,
-    link: "https://github.com/gothsec/MoviesForDevs",
-    preview: "https://movies-for-devs.vercel.app",
-    status: "Deployed",
+    title: "Library Store",
+    image: libraryStore as ImageMetadata,
+    link: "#",
+    preview: "/projects/library-store",
+    status: "Full-Stack",
+    slug: "library-store",
+    description: "A full-stack online library store built with Django.",
   },
   {
-    title: "StockIn",
-    image: stockin as ImageMetadata,
-    link: "https://github.com/gothsec/stockin-demo",
-    preview: "https://stockin-demo.vercel.app",
-    status: "On Development",
+    title: "Issue Tracker",
+    image: issueTracker as ImageMetadata,
+    link: "#",
+    preview: "/projects/issue-tracker",
+    status: "Web App",
+    slug: "issue-tracker",
+    description: "An issue tracking platform built using Next.js App Router.",
   },
   {
-    title: "Svgl.app",
-    image: svgl as ImageMetadata,
-    link: "https://github.com/pheralb/svgl",
-    preview: "https://svgl.app",
-    status: "Contributor",
+    title: "Real-Time Chat",
+    image: realtimeChat as ImageMetadata,
+    link: "#",
+    preview: "/projects/realtime-chat",
+    status: "Real-Time",
+    slug: "realtime-chat",
+    description: "A simple real-time chat application built with Next.js.",
   },
   {
-    title: "Rifas Velez Web",
-    image: velez as ImageMetadata,
-    link: "https://github.com/Buga-Software/rifasvelez-web",
-    preview: "https://www.rifasvelez.com",
-    status: "Deployed",
+    title: "Clinic Booking",
+    image: clinicBooking as ImageMetadata,
+    link: "https://clinic-reserving-system.vercel.app/en",
+    preview: "/projects/clinic-booking-system",
+    status: "Full-Stack",
+    slug: "clinic-booking-system",
+    isPremium: true,
+    description:
+      "A production-ready, white-label clinic management solution designed to streamline healthcare operations. This premium application offers a seamless booking experience for patients and a powerful administrative dashboard for doctors.",
   },
 ];
+
+const premiumProjects = projects.filter((p) => p.isPremium);
+const otherProjects = projects.filter((p) => !p.isPremium);
 ---
 
 <section
@@ -53,17 +69,81 @@ const projects: Project[] = [
     <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">My work</h2>
     <h3 class="text-4xl md:text-5xl font-medium mb-8">Projects</h3>
 
+    {
+      premiumProjects.map((project) => (
+        <div class="mb-12 group relative">
+          <div class="absolute -top-4 -right-4 z-10 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black text-sm font-bold px-4 py-1.5 rounded-full shadow-lg shadow-yellow-500/20 animate-pulse flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-crown"
+            >
+              <path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14" />
+            </svg>
+            PREMIUM PRODUCT
+          </div>
+          <a href={`/projects/${project.slug}`} class="block">
+            <div class="rounded-3xl overflow-hidden shadow-2xl hover:shadow-yellow-500/20 transition-all duration-500 border-2 border-yellow-500/50 relative">
+              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
+              <div class="absolute bottom-0 left-0 right-0 h-3/4 bg-gradient-to-t from-black via-black/80 to-transparent backdrop-blur-[2px] z-10" />
+              <Image
+                src={project.image}
+                alt={project.title}
+                class="w-full h-[500px] md:h-[450px] object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 z-20">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                  <div>
+                    <h4 class="text-3xl md:text-5xl font-bold text-white mb-2">
+                      {project.title}
+                    </h4>
+                    <p class="text-yellow-400 font-medium text-lg mb-4">
+                      Production-Ready SaaS Solution
+                    </p>
+                    <p class="text-white/80 max-w-2xl line-clamp-2 md:line-clamp-none">
+                      {project.description}
+                    </p>
+                  </div>
+                  <div class="bg-yellow-500 text-black font-bold px-6 py-3 rounded-xl flex items-center gap-2 hover:bg-yellow-400 transition-colors">
+                    View Product
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <>
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      ))
+    }
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {
-        projects.map((project) => (
-          <div class="group">
-            <a
-              href={project.preview}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="block"
-            >
-              <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-4">
+        otherProjects.map((project) => (
+          <div class="group relative">
+            <a href={`/projects/${project.slug}`} class="block">
+              <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 mb-4">
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -78,23 +158,38 @@ const projects: Project[] = [
                   </span>
                 </div>
                 <div class="flex gap-2 ml-auto">
-                  <a
-                    target="_blank"
-                    href={project.link}
-                    aria-label="GitHub"
-                    class="size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      class="size-7"
+                  {project.link === "#" ? (
+                    <div
+                      aria-label="GitHub (Private)"
+                      class="size-14 flex justify-center items-center text-[var(--white-icon)] opacity-50 cursor-not-allowed border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c]"
                     >
-                      <path d="M24 12L18.3431 17.6569L16.9289 16.2426L21.1716 12L16.9289 7.75736L18.3431 6.34315L24 12ZM2.82843 12L7.07107 16.2426L5.65685 17.6569L0 12L5.65685 6.34315L7.07107 7.75736L2.82843 12ZM9.78845 21H7.66009L14.2116 3H16.3399L9.78845 21Z" />
-                    </svg>
-                  </a>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="size-7"
+                      >
+                        <path d="M24 12L18.3431 17.6569L16.9289 16.2426L21.1716 12L16.9289 7.75736L18.3431 6.34315L24 12ZM2.82843 12L7.07107 16.2426L5.65685 17.6569L0 12L5.65685 6.34315L7.07107 7.75736L2.82843 12ZM9.78845 21H7.66009L14.2116 3H16.3399L9.78845 21Z" />
+                      </svg>
+                    </div>
+                  ) : (
+                    <a
+                      target="_blank"
+                      href={project.link}
+                      aria-label="GitHub"
+                      class="size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="size-7"
+                      >
+                        <path d="M24 12L18.3431 17.6569L16.9289 16.2426L21.1716 12L16.9289 7.75736L18.3431 6.34315L24 12ZM2.82843 12L7.07107 16.2426L5.65685 17.6569L0 12L5.65685 6.34315L7.07107 7.75736L2.82843 12ZM9.78845 21H7.66009L14.2116 3H16.3399L9.78845 21Z" />
+                      </svg>
+                    </a>
+                  )}
                   <a
-                    target="_blank"
                     href={project.preview}
                     aria-label="Preview"
                     class="size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
@@ -117,7 +212,7 @@ const projects: Project[] = [
     </div>
     <a
       target="_blank"
-      href="https://github.com/Gothsec?tab=repositories"
+      href="https://github.com/obsessedwithweb?tab=repositories"
       aria-label="GitHub"
       class="w-full flex items-center justify-center gap-2 mt-9 text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-[var(--white-icon-tr)] p-3 rounded-full bg-[#1414149c] hover:bg-[var(--white-icon-tr)] hover:scale-105"
     >

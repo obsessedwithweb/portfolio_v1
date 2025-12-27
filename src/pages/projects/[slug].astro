@@ -1,0 +1,270 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/footer.astro";
+import TechStack from "../../components/TechStack.astro";
+import { ExpandOnHover } from "../../React/ExpandOnHover";
+import { projects } from "../../data/projects";
+
+export async function getStaticPaths() {
+    return projects.map((project) => ({
+        params: { slug: project.slug },
+        props: { project },
+    }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout title={`${project.title} | Project Details`}>
+    <main class="min-h-screen pt-32 pb-20">
+        <div class="container mx-auto px-4">
+            {/* Back Button */}
+            <a
+                href="/"
+                class="inline-flex items-center gap-2 text-[var(--white)] hover:text-[var(--sec)] transition-colors mb-8 group"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="group-hover:-translate-x-1 transition-transform"
+                >
+                    <path d="M19 12H5"></path>
+                    <path d="M12 19l-7-7 7-7"></path>
+                </svg>
+                Back to Previous Page
+            </a>
+
+            <section class="mb-20">
+                <div class="flex flex-col gap-6">
+                    {
+                        project.isPremium && (
+                            <div class="inline-flex items-center gap-2 self-start bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 px-4 py-2 rounded-full text-sm font-bold tracking-wider mb-2">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-crown"
+                                >
+                                    <path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14" />
+                                </svg>
+                                PREMIUM PRODUCT
+                            </div>
+                        )
+                    }
+                    <h1
+                        class="text-4xl md:text-6xl font-bold text-[var(--white)] mb-2"
+                    >
+                        {project.title}
+                    </h1>
+                    <p
+                        class="text-lg text-[var(--white-icon)] max-w-3xl leading-relaxed"
+                    >
+                        {project.description}
+                    </p>
+
+                    {
+                        project.isPremium && (
+                            <div class="mt-8 p-8 rounded-3xl bg-gradient-to-br from-[#1a1a1a] to-black border border-yellow-500/20 relative overflow-hidden group">
+                                <div class="absolute top-0 right-0 w-64 h-64 bg-yellow-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+
+                                <div class="relative z-10">
+                                    <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                        Ready to Launch Your Clinic?
+                                        <span class="text-yellow-500 animate-pulse">
+                                            ✨
+                                        </span>
+                                    </h3>
+                                    <p class="text-[var(--white-icon)] mb-8 max-w-2xl">
+                                        This isn't just a project—it's a fully
+                                        functional, production-ready SaaS
+                                        product. Get a head start on your
+                                        healthcare business with a secure,
+                                        scalable, and white-label solution.
+                                    </p>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                                        <div class="flex flex-col gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-yellow-500/30 transition-colors">
+                                            <div class="p-2 bg-yellow-500/10 w-fit rounded-lg text-yellow-500">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="24"
+                                                    height="24"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="lucide lucide-shield-check"
+                                                >
+                                                    <>
+                                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                                                        <path d="m9 12 2 2 4-4" />
+                                                    </>
+                                                </svg>
+                                            </div>
+                                            <h4 class="font-semibold text-white">
+                                                Secure & Compliant
+                                            </h4>
+                                            <p class="text-sm text-[var(--white-icon)]">
+                                                OTP auth & role-based access
+                                                control built-in.
+                                            </p>
+                                        </div>
+                                        <div class="flex flex-col gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-yellow-500/30 transition-colors">
+                                            <div class="p-2 bg-yellow-500/10 w-fit rounded-lg text-yellow-500">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="24"
+                                                    height="24"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="lucide lucide-zap"
+                                                >
+                                                    <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+                                                </svg>
+                                            </div>
+                                            <h4 class="font-semibold text-white">
+                                                High Performance
+                                            </h4>
+                                            <p class="text-sm text-[var(--white-icon)]">
+                                                Optimized Next.js architecture
+                                                for speed.
+                                            </p>
+                                        </div>
+                                        <div class="flex flex-col gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-yellow-500/30 transition-colors">
+                                            <div class="p-2 bg-yellow-500/10 w-fit rounded-lg text-yellow-500">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="24"
+                                                    height="24"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="lucide lucide-bar-chart-3"
+                                                >
+                                                    <>
+                                                        <path d="M3 3v18h18" />
+                                                        <path d="M18 17V9" />
+                                                        <path d="M13 17V5" />
+                                                        <path d="M8 17v-3" />
+                                                    </>
+                                                </svg>
+                                            </div>
+                                            <h4 class="font-semibold text-white">
+                                                Analytics Ready
+                                            </h4>
+                                            <p class="text-sm text-[var(--white-icon)]">
+                                                Integrated dashboards for
+                                                business insights.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex flex-wrap gap-4">
+                                        <a
+                                            href="/#contact"
+                                            class="inline-flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-8 py-4 rounded-xl transition-all hover:scale-105 shadow-lg shadow-yellow-500/20"
+                                        >
+                                            Request a Demo
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-arrow-right"
+                                            >
+                                                <>
+                                                    <path d="M5 12h14" />
+                                                    <path d="m12 5 7 7-7 7" />
+                                                </>
+                                            </svg>
+                                        </a>
+                                        <a
+                                            href="#gallery"
+                                            class="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white font-medium px-8 py-4 rounded-xl transition-all border border-white/10"
+                                        >
+                                            View Gallery
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
+                </div>
+            </section>
+
+            {/* Technologies Used */}
+            <section class="mb-20">
+                <h2
+                    class="text-2xl md:text-3xl font-bold text-[var(--white)] mb-8"
+                >
+                    Technologies Used
+                </h2>
+                <TechStack technologies={project.technologies} />
+            </section>
+
+            {/* Learnings & Benefits */}
+            <section class="mb-20">
+                <h2
+                    class="text-2xl md:text-3xl font-bold text-[var(--white)] mb-8"
+                >
+                    Learnings & Benefits
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {
+                        project.learnings.map((learning) => (
+                            <div class="bg-[var(--white-icon-tr)] p-8 rounded-2xl border border-[var(--white-icon-tr)] hover:border-[var(--sec)] transition-colors">
+                                <h3 class="text-xl font-bold text-[var(--sec)] mb-4">
+                                    {learning.title}
+                                </h3>
+                                <p class="text-[var(--white-icon)] leading-relaxed">
+                                    {learning.content}
+                                </p>
+                            </div>
+                        ))
+                    }
+                </div>
+            </section>
+
+            {/* Project Gallery */}
+            <section class="mb-20" id="gallery">
+                <h2
+                    class="text-2xl md:text-3xl font-bold text-[var(--white)] mb-8"
+                >
+                    Project Gallery
+                </h2>
+                <div class="w-full">
+                    <ExpandOnHover client:load images={project.images} />
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <Footer />
+</Layout>
