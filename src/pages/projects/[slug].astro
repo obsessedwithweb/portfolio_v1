@@ -15,7 +15,13 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 ---
 
-<Layout title={`${project.title} | Project Details`}>
+<Layout
+    title={`${project.title} | Project Details`}
+    description={project.descriptionAr
+        ? `${project.description} | ${project.descriptionAr}`
+        : project.description}
+    keywords={project.keywords?.join(", ")}
+>
     <main class="min-h-screen pt-32 pb-20">
         <div class="container mx-auto px-4">
             {/* Back Button */}

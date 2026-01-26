@@ -1,31 +1,104 @@
 ---
 interface Props {
   title: string;
+  description?: string;
+  keywords?: string;
 }
 
 import { ClientRouter } from "astro:transitions";
 
-const { title } = Astro.props;
+const { title, description, keywords } = Astro.props;
+
+const defaultDescription =
+  "Med. Asaad RAHMOUNI (محمد أسعد رحموني) - Full Stack Engineer specializing in robust back-end systems and pixel-perfect front-ends. Explore my portfolio of production-ready SaaS solutions and real-time applications.";
+const defaultKeywords =
+  "Med Asaad Rahmouni, محمد أسعد رحموني, Full Stack Engineer, Software Developer, Django, Next.js, React, PostgreSQL, Python, TypeScript, Portfolio, Web Development, SaaS Solutions, مطور برمجيات, مهندس فول ستاك";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Software Developer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta property="og:title" content="Med. Asaad RAHMOUNI" />
-    <meta property="og:description" content="Software Developer" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title} | Full Stack Engineer & Software Developer</title>
+    <meta
+      name="title"
+      content={`${title} | Full Stack Engineer & Software Developer`}
+    />
+    <meta name="description" content={description || defaultDescription} />
+    <meta name="keywords" content={keywords || defaultKeywords} />
+    <meta name="author" content="Med. Asaad RAHMOUNI" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://rma-world.netlify.app" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://rma-world.netlify.app" />
+    <meta
+      property="og:title"
+      content="Med. Asaad RAHMOUNI (محمد أسعد رحموني) | Full Stack Engineer"
+    />
+    <meta
+      property="og:description"
+      content={description || defaultDescription}
+    />
     <meta
       property="og:image"
       content="https://rma-world.netlify.app/og.image.png"
     />
-    <meta property="og:url" content="https://rma-world.netlify.app" />
-    <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Med. Asaad RAHMOUNI Portfolio" />
 
-    <title>{title}</title>
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://rma-world.netlify.app" />
+    <meta
+      property="twitter:title"
+      content="Med. Asaad RAHMOUNI (محمد أسعد رحموني) | Full Stack Engineer"
+    />
+    <meta
+      property="twitter:description"
+      content={description || defaultDescription}
+    />
+    <meta
+      property="twitter:image"
+      content="https://rma-world.netlify.app/og.image.png"
+    />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Med. Asaad RAHMOUNI",
+        "alternateName": "محمد أسعد رحموني",
+        "url": "https://rma-world.netlify.app",
+        "image": "https://rma-world.netlify.app/og.image.png",
+        "sameAs": [
+          "https://github.com/obsessedwithweb",
+          "https://www.linkedin.com/in/rahmouni-med-asaad"
+        ],
+        "jobTitle": "Full Stack Engineer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Freelance"
+        },
+        "description": "Full Stack Engineer specializing in building robust web applications with Django, Next.js, and React."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Med. Asaad RAHMOUNI Portfolio",
+        "url": "https://rma-world.netlify.app",
+        "description": "Portfolio of Med. Asaad RAHMOUNI, a Full Stack Engineer."
+      }
+    </script>
+
     <ClientRouter />
   </head>
   <body class="bg-[--background] sm:px-28 lg:px-20 px-9">

@@ -2,6 +2,8 @@ export interface Project {
     slug: string;
     title: string;
     description: string;
+    descriptionAr?: string;
+    keywords?: string[];
     technologies: string[];
     learnings: {
         title: string;
@@ -97,6 +99,8 @@ export const projects: Project[] = [
         slug: "clinic-booking-system",
         title: "Clinic Booking System",
         description: "A production-ready, white-label clinic management solution designed to streamline healthcare operations. This premium, multilingual application offers a seamless booking experience for patients and a powerful administrative dashboard for doctors, built with scalability and security in mind.",
+        descriptionAr: "نظام إدارة العيادات - حل جاهز للاستخدام لإدارة العمليات الطبية. يوفر هذا التطبيق المتميز تجربة حجز سلسة للمرضى ولوحة تحكم إدارية قوية للأطباء، مع دعم كامل للغة العربية والإنجليزية.",
+        keywords: ["Clinic Booking System", "نظام حجز عيادات", "SaaS Solution", "Medical Management Software", "Healthcare Booking Platform", "نظام إدارة طبية", "Next.js Clinic App"],
         technologies: ["next", "react", "postgresql", "tailwindcss", "better-auth", "neon", "typescript", "shadcn-ui"],
         isPremium: true,
         learnings: [
